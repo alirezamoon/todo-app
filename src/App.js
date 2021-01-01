@@ -23,6 +23,24 @@ class App extends Component {
 
   }
 
+  deleteTodo = (key) => {
+    this.setState(prevState => {
+      return { todos: prevState.todos.filter(item => item.key !== key) }
+    })
+  }
+
+
+  toggleTodos = (key) => {
+    let item = this.state.todos.find(item => item.key === key)
+    item.done = !item.done
+
+    let newTodo = [...this.state.todos.filter(item => item.key !== key)]
+
+    this.setState({ todos: [...newTodo, item] })
+  }
+
+
+
 
   render() {
 
@@ -63,7 +81,11 @@ class App extends Component {
                 {
                   filterTodos.length === 0
                     ? <p>there isn't any todos!</p>
-                    : filterTodos.map(item => <Todo key={item.key} text={item.text} />)
+                    : filterTodos.map(item => <Todo
+                      key={item.key}
+                      item={item}
+                      delete={this.deleteTodo}
+                      toggle={this.toggleTodos} />)
                 }
 
 

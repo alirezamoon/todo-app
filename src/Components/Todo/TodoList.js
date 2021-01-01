@@ -1,10 +1,10 @@
-import React , {useState} from 'react'
+import React, { useState } from 'react'
 import Todo from "./Todo";
 import NavTodo from './navTodo'
 
 const TodoList = (props) => {
 
-    const [statusDone , setStatusDone] = useState(false)
+    const [statusDone, setStatusDone] = useState(false)
 
     let filterTodos = props.todos.filter(item => item.done === statusDone)
 
@@ -14,10 +14,10 @@ const TodoList = (props) => {
 
     return (
         <>
-            <NavTodo 
-            todos={props.todos}
-            statusDone={statusDone}
-            toggle={() => toggleStatusDone()} />
+            <NavTodo
+                todos={props.todos}
+                statusDone={statusDone}
+                toggle={() => toggleStatusDone()} />
             {
                 filterTodos.length === 0
                     ? <p>there isn't any todos!</p>

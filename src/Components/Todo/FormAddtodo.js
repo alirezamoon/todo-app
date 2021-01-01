@@ -4,7 +4,6 @@ const FormTodo = (props) => {
 
     const [text, setText] = useState('')
 
-
     const inputHandler = e => setText(e.target.value)
 
     const formHandler = (e) => {

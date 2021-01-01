@@ -68,8 +68,6 @@ class App extends Component {
           <div className="todosList">
             <div className="container">
               <div className="d-flex flex-column align-items-center ">
-
-
                 <TodoList
                   delete={this.deleteTodo}
                   toggle={this.toggleTodos}

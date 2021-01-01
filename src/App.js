@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.css'
-import Header from './Components/Header'
-import FormTodo from './Components/FormAddtodo'
-import Todo from "./Components/Todo";
+import Header from './Components/Layout/Header'
+import FormTodo from './Components/Todo/FormAddtodo'
+import TodoList from './Components/Todo/TodoList'
 
 
 
@@ -10,8 +10,7 @@ import Todo from "./Components/Todo";
 class App extends Component {
 
   state = {
-    todos: [],
-    statusDone: false,
+    todos: []
   }
 
   addToDo = (text) => {
@@ -54,10 +53,6 @@ class App extends Component {
 
   render() {
 
-    let filterTodos = this.state.todos.filter(item => item.done === this.state.statusDone)
-    let filterTodosDone = this.state.todos.filter(item => item.done === true)
-    let filterTodosUndone = this.state.todos.filter(item => item.done === false)
-
 
     return (
       <div>
@@ -73,33 +68,13 @@ class App extends Component {
           <div className="todosList">
             <div className="container">
               <div className="d-flex flex-column align-items-center ">
-                <nav className="col-6 mb-3">
-                  <div className="nav nav-tabs" id="nav-tab" role="tablist">
-                    <a
-                      className={`nav-item nav-link font-weight-bold ${this.state.statusDone ? '' : 'active'}`}
-                      id="nav-home-tab"
-                      onClick={() => this.setState({ statusDone: false })}>undone
-                    <span className="badge badge-secondary">{filterTodosUndone.length}</span>
-                    </a>
-                    <a
-                      className={`nav-item nav-link font-weight-bold ${this.state.statusDone ? 'active' : ''}`}
-                      id="nav-profile-tab"
-                      onClick={() => this.setState({ statusDone: true })}>done
-                    <span className="badge badge-success">{filterTodosDone.length}</span></a>
-                  </div>
-                </nav>
-                {
-                  filterTodos.length === 0
-                    ? <p>there isn't any todos!</p>
-                    : filterTodos.map(item => <Todo
-                      key={item.key}
-                      item={item}
-                      delete={this.deleteTodo}
-                      toggle={this.toggleTodos}
-                      edit={this.editTodo} />)
-                }
 
 
+                <TodoList
+                  delete={this.deleteTodo}
+                  toggle={this.toggleTodos}
+                  edit={this.editTodo}
+                  todos={this.state.todos} />
               </div>
 
             </div>

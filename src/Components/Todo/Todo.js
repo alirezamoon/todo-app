@@ -3,7 +3,6 @@ import EditTodo from './EditTodo'
 
 
 
-
 const Todo = (props) => {
 
 

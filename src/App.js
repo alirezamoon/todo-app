@@ -4,11 +4,14 @@ import Header from './Components/Header'
 import FormTodo from './Components/FormAddtodo'
 import Todo from "./Components/Todo";
 
+
+
+
 class App extends Component {
 
   state = {
     todos: [],
-    statusDone: false
+    statusDone: false,
   }
 
   addToDo = (text) => {
@@ -29,6 +32,14 @@ class App extends Component {
     })
   }
 
+  editTodo = (key, text) => {
+    let item = this.state.todos.find(item => item.key === key)
+    item.text = text
+
+    let newTodo = this.state.todos.filter(item => item.key !== key)
+
+    this.setState({ todos: [...newTodo, item] })
+  }
 
   toggleTodos = (key) => {
     let item = this.state.todos.find(item => item.key === key)
@@ -38,7 +49,6 @@ class App extends Component {
 
     this.setState({ todos: [...newTodo, item] })
   }
-
 
 
 
@@ -85,7 +95,8 @@ class App extends Component {
                       key={item.key}
                       item={item}
                       delete={this.deleteTodo}
-                      toggle={this.toggleTodos} />)
+                      toggle={this.toggleTodos}
+                      edit={this.editTodo} />)
                 }
 
 

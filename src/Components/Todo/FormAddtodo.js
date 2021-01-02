@@ -1,11 +1,13 @@
-import React, { useState , useContext } from 'react'
+import React, { useState, useContext } from 'react'
 import TodosContext from './../Context/todoContext'
+import AuthContext from './../Context/authContext'
 
 const FormTodo = (props) => {
 
     const todosContext = useContext(TodosContext)
+    const authContext = useContext(AuthContext)
 
-    let {add} = todosContext
+    let { add } = todosContext
 
     const [text, setText] = useState('')
 
@@ -18,17 +20,21 @@ const FormTodo = (props) => {
     }
 
     return (
-        <form className="form-inline" onSubmit={formHandler}>
-            <div className="form-group">
-                <input
-                    type="text"
-                    className="form-control mx-sm-3"
-                    placeholder="i want to do ..."
-                    value={text}
-                    onChange={inputHandler} />
-                <button type='submit' className="btn btn-primary">add</button>
-            </div>
-        </form>
+        <>
+            {authContext.authenticated
+                ? <form className="form-inline" onSubmit={formHandler}>
+                    <div className="form-group">
+                        <input
+                            type="text"
+                            className="form-control mx-sm-3"
+                            placeholder="i want to do ..."
+                            value={text}
+                            onChange={inputHandler} />
+                        <button type='submit' className="btn btn-primary">add</button>
+                    </div>
+                </form>
+                : <p>You must be log in</p>}
+        </>
     )
 
 

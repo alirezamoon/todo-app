@@ -8,13 +8,14 @@ import TodoList from './Components/Todo/TodoList'
 
 // Contexts
 import TodosContext from './Components/Context/todoContext'
-
+import AuthContext from './Components/Context/authContext'
 
 
 class App extends Component {
 
   state = {
-    todos: []
+    todos: [],
+    authenticated: false
   }
 
   addToDo = (text) => {
@@ -53,40 +54,50 @@ class App extends Component {
     this.setState({ todos: [...newTodo, item] })
   }
 
+  toggleAuth = () => {
+    this.setState({ authenticated: !this.state.authenticated })
+  }
 
 
   render() {
 
 
     return (
-      <TodosContext.Provider value={{
-        delete: this.deleteTodo,
-        add:this.addToDo,
-        toggle:this.toggleTodos,
-        edit:this.editTodo,
-        todos: this.state.todos,
+      <AuthContext.Provider value={{
+        authenticated: this.state.authenticated,
+        toggleAuth: this.toggleAuth,
       }}>
-        <div>
-          <Header />
-          <main>
-            <section className="jumbotron">
-              <div className="container d-flex flex-column align-items-center">
-                <h1 className="jumbotron-heading">Welcome!</h1>
-                <p className="lead text-muted">To get started, add some items to your list:</p>
-                <FormTodo />
-              </div>
-            </section>
-            <div className="todosList">
-              <div className="container">
-                <div className="d-flex flex-column align-items-center ">
-                  <TodoList />
-                </div>
+        <TodosContext.Provider value={{
+          delete: this.deleteTodo,
+          add: this.addToDo,
+          toggle: this.toggleTodos,
+          edit: this.editTodo,
+          todos: this.state.todos,
+        }}>
+          <div>
 
+            <Header />
+            <main>
+              <section className="jumbotron">
+                <div className="container d-flex flex-column align-items-center">
+                  <h1 className="jumbotron-heading">Welcome!</h1>
+                  <p className="lead text-muted">To get started, add some items to your list:</p>
+                  <FormTodo />
+                </div>
+              </section>
+              <div className="todosList">
+                <div className="container">
+                  <div className="d-flex flex-column align-items-center ">
+                    <TodoList />
+                  </div>
+
+                </div>
               </div>
-            </div>
-          </main>
-        </div>
-      </TodosContext.Provider>
+            </main>
+          </div>
+        </TodosContext.Provider>
+      </AuthContext.Provider>
+
     );
   }
 }

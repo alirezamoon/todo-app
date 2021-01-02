@@ -62,7 +62,7 @@ class App extends Component {
       <TodosContext.Provider value={{
         delete: this.deleteTodo,
         add:this.addToDo,
-        toggle:this.addToDo,
+        toggle:this.toggleTodos,
         edit:this.editTodo,
         todos: this.state.todos,
       }}>

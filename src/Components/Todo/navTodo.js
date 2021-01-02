@@ -1,8 +1,15 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import TodosContext from './../Context/todoContext'
 
 const NavTodo = (props) => {
-    let filterTodosDone = props.todos.filter(item => item.done === true)
-    let filterTodosUndone = props.todos.filter(item => item.done === false)
+
+    
+    const todosContext = useContext(TodosContext)
+
+    let {todos} =  todosContext
+
+    let filterTodosDone = todos.filter(item => item.done === true)
+    let filterTodosUndone = todos.filter(item => item.done === false)
 
     return (
         <nav className="col-6 mb-3">

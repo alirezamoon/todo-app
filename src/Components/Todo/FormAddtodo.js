@@ -1,6 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState , useContext } from 'react'
+import TodosContext from './../Context/todoContext'
 
 const FormTodo = (props) => {
+
+    const todosContext = useContext(TodosContext)
+
+    let {add} = todosContext
 
     const [text, setText] = useState('')
 
@@ -8,7 +13,7 @@ const FormTodo = (props) => {
 
     const formHandler = (e) => {
         e.preventDefault()
-        props.add(text)
+        add(text)
         setText('')
     }
 

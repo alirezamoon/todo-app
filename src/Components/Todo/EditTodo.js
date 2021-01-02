@@ -1,8 +1,10 @@
-
-
-import React from 'react'
+import React, { useContext } from 'react'
+import TodosContext from './../Context/todoContext'
 
 const EditTodo = (props) => {
+    
+    const todosContext = useContext(TodosContext)
+
     return (
         <div className="col-6 mb-2">
             <div className="d-flex justify-content-between align-items-center border rounded p-3">
@@ -10,7 +12,7 @@ const EditTodo = (props) => {
                     <input
                         type='text'
                         value={props.item.text}
-                        onChange={(e) => props.edit(props.item.key, e.target.value)} />
+                        onChange={(e) => todosContext.edit(props.item.key, e.target.value)} />
                 </div>
                 <div>
                     <button

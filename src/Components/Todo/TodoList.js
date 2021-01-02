@@ -1,12 +1,17 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import Todo from "./Todo";
-import NavTodo from './navTodo'
+import NavTodo from './NavTodo'
+import TodosContext from './../Context/todoContext'
 
 const TodoList = (props) => {
 
+    const todosContext = useContext(TodosContext)
+
+    let { todos } = todosContext
     const [statusDone, setStatusDone] = useState(false)
 
-    let filterTodos = props.todos.filter(item => item.done === statusDone)
+    let filterTodos = todos.filter(item => item.done === statusDone)
+
 
     const toggleStatusDone = () => {
         setStatusDone(!statusDone)
@@ -15,7 +20,6 @@ const TodoList = (props) => {
     return (
         <>
             <NavTodo
-                todos={props.todos}
                 statusDone={statusDone}
                 toggle={() => toggleStatusDone()} />
             {
@@ -23,10 +27,7 @@ const TodoList = (props) => {
                     ? <p>there isn't any todos!</p>
                     : filterTodos.map(item => <Todo
                         key={item.key}
-                        item={item}
-                        delete={props.delete}
-                        toggle={props.toggle}
-                        edit={props.edit} />)
+                        item={item} />)
             }
         </>
     )

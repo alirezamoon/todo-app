@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState , useContext } from 'react'
 import EditTodo from './EditTodo'
-
+import TodosContext from './../Context/todoContext'
 
 
 const Todo = (props) => {
+
+    const todosContext = useContext(TodosContext)
 
 
     const [edit, setEdit] = useState(false)
@@ -20,7 +22,7 @@ const Todo = (props) => {
                             <button
                                 type="button"
                                 className={`btn btn-${props.item.done ? 'warning' : 'success'} btn-sm`}
-                                onClick={() => props.toggle(props.item.key)}>{props.item.done ? 'undone' : 'done'}</button>
+                                onClick={() => todosContext.toggle(props.item.key)}>{props.item.done ? 'undone' : 'done'}</button>
                             <button
                                 type="button"
                                 className="btn btn-info btn-sm ml-1"
@@ -28,14 +30,13 @@ const Todo = (props) => {
                             <button
                                 type="button"
                                 className="btn btn-danger btn-sm ml-1"
-                                onClick={() => props.delete(props.item.key)}>delete</button>
+                                onClick={() => todosContext.delete(props.item.key)}>delete</button>
                         </div>
                     </div>
                 </div>)
                 : <EditTodo
                     key={props.item.key}
                     item={props.item}
-                    edit={props.edit}
                     clicked={() => setEdit(false)} />
             }
         </>
